@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesignSphere | Modern Design Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --bg-color: #fafafa;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Typography */
+        h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+        h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.02em; }
+        h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+        p { color: var(--text-muted); }
+
+        /* Navigation */
+        .navbar {
+            padding: 1.5rem 0;
+            background: transparent;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--text-main);
+            letter-spacing: -0.05em;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-primary { background: var(--text-main); color: white; }
+        .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+        .btn-secondary { background: white; color: var(--text-main); border: 1px solid var(--border-color); }
+        .btn-secondary:hover { border-color: var(--text-main); transform: translateY(-2px); }
+        .btn-outline { border: 2px solid var(--text-main); color: var(--text-main); padding: 0.5rem 1.25rem; }
+        .btn-outline:hover { background: var(--text-main); color: white; }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 6rem;
+            text-align: center;
+        }
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .subtitle {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 0;
+            background-color: var(--card-bg);
+        }
+        .text-center { text-align: center; }
+        .section-desc { margin-bottom: 4rem; font-size: 1.125rem; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: var(--bg-color);
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .icon {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            background: white;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-main);
+            color: white;
+            padding: 6rem 0 2rem;
+        }
+        .footer h2 { color: white; }
+        .footer p { color: #9ca3af; }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+        .email-link {
+            display: block;
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            margin: 0.5rem 0 1.5rem;
+            transition: color 0.3s ease;
+        }
+        .email-link:hover { color: var(--accent); }
+        .location { font-size: 0.875rem; }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            font-size: 0.875rem;
+        }
+
+        /* Scroll Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .hero { padding: 5rem 0; }
+            .hero-buttons { flex-direction: column; }
+            .footer-content { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">DesignSphere.</a>
+            <a href="#contact" class="btn btn-outline">Let's Talk</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container hero-content reveal">
+            <h1>We create modern, eye-catching designs for your business.</h1>
+            <p class="subtitle">Elevate your brand with premium visuals. Affordable prices & fast delivery without compromising on quality.</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary">Our Services</a>
+                <a href="#contact" class="btn btn-secondary">Get a Quote</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="services" class="services">
+        <div class="container text-center reveal">
+            <h2>Our Expertise</h2>
+            <p class="section-desc">Tailored design solutions to help you stand out.</p>
+            
+            <div class="grid services-grid">
+                <div class="card">
+                    <div class="icon">✒️</div>
+                    <h3>Logos</h3>
+                    <p>Memorable and scalable brand identities built for the modern market.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">🖼️</div>
+                    <h3>Posters</h3>
+                    <p>High-impact visual communication that captures attention instantly.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">📄</div>
+                    <h3>Brochures</h3>
+                    <p>Clean, professional layouts that tell your business's story perfectly.</p>
+                </div>
+                <div class="card">
+                    <div class="icon">📱</div>
+                    <h3>Social Media</h3>
+                    <p>Engaging, platform-optimized graphics to boost your online presence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="footer">
+        <div class="container footer-content reveal">
+            <div class="footer-brand">
+                <h2>DesignSphere.</h2>
+                <p>Fast. Affordable. Eye-catching.</p>
+            </div>
+            <div class="footer-contact">
+                <p>Ready to start your project?</p>
+                <a href="mailto:designspherephil@gmail.com" class="email-link">designspherephil@gmail.com</a>
+                <p class="location">Based in Manila, Philippines</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 DesignSphere Philippines. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 100;
+
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        // Listen for scroll events
+        window.addEventListener('scroll', revealOnScroll);
+
+        // Trigger once on load to show above-the-fold content
+        window.addEventListener('load', revealOnScroll);
+    </script>
+</body>
+</html>
